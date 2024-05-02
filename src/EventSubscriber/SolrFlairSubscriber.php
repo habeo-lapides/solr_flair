@@ -56,9 +56,19 @@ class SolrFlairSubscriber implements EventSubscriberInterface {
     dpm($solr_index);
 
     // Switch the Solr index.
-    $search_api_config = $this->configFactory->getEditable('search_api.server.solr_server');
-    $search_api_config->set('backend_config.connector_config.core', $solr_index);
-    $search_api_config->save();
+    // $search_api_config = $this->configFactory->getEditable('search_api.server.solr_server');
+    // $search_api_config->set('backend_config.connector_config.core', $solr_index);
+    // $search_api_config->save();
+    try {
+      $search_api_config = $this->configFactory->getEditable('search_api.server.solr_server');
+      $search_api_config->set('backend_config.connector_config.core', $solr_index);
+      $search_api_config->save();
+    }
+    catch (\Exception $e) {
+      // Handle the exception, e.g., log the error or take appropriate action.
+      \Drupal::logger('solr_flair')->error('Error switching Solr index: @error', ['@error' => $e->getMessage()]);
+    }
+
   }
 
 }
