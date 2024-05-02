@@ -1,0 +1,8 @@
+# solr_flair.services.yml
+services:
+  solr_flair.even_subscriber:
+    class: Drupal\solr_flair\EventSubscriber\SolrFlairSubscriber
+    arguments:
+      - '@config.factory'
+    tags:
+      - { name: event_subscriber }

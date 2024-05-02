@@ -1,0 +1,7 @@
+name: SOLR Flair
+type: module
+description: 'Switches SOLR Index based on Environment'
+package: custom
+core_version_requirement: ^10
+dependancies:
+  - search_api: search_api
